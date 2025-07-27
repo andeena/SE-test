@@ -1,0 +1,162 @@
+{
+	"info": {
+		"_postman_id": "a1b2c3d4-e5f6-7890-1234-abcdef123456",
+		"name": "Task Management API",
+		"description": "Koleksi untuk menguji API Manajemen Tugas yang dibuat dengan Node.js dan Express.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Tasks",
+			"description": "Endpoint untuk mengelola tugas",
+			"item": [
+				{
+					"name": "Create a New Task",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Selesaikan Laporan Mingguan\",\n    \"description\": \"Buat laporan progres untuk sprint terakhir.\",\n    \"category\": \"Pekerjaan\",\n    \"priority\": \"High\",\n    \"deadline\": \"2025-08-05T17:00:00.000Z\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/tasks",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tasks"
+							]
+						},
+						"description": "Membuat tugas baru dengan detail yang diberikan."
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Tasks (with filter & sort)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/tasks?priority=High&sortBy=deadline&order=asc",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tasks"
+							],
+							"query": [
+								{
+									"key": "priority",
+									"value": "High",
+									"description": "(Opsional) Filter berdasarkan prioritas: Low, Medium, High"
+								},
+								{
+									"key": "category",
+									"value": "Pekerjaan",
+									"description": "(Opsional) Filter berdasarkan kategori",
+									"disabled": true
+								},
+								{
+									"key": "sortBy",
+									"value": "deadline",
+									"description": "(Opsional) Urutkan berdasarkan: deadline, priority, createdAt"
+								},
+								{
+									"key": "order",
+									"value": "asc",
+									"description": "(Opsional) Urutan: asc (ascending) atau desc (descending)"
+								}
+							]
+						},
+						"description": "Mengambil semua tugas. Anda bisa mengaktifkan atau menonaktifkan parameter query untuk mencoba berbagai opsi filter dan urutan."
+					},
+					"response": []
+				},
+				{
+					"name": "Get a Single Task by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/tasks/{{taskId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tasks",
+								"{{taskId}}"
+							]
+						},
+						"description": "Mengambil detail tugas spesifik. Ganti `{{taskId}}` dengan ID tugas yang valid dari respons 'Create Task' atau 'Get All Tasks'."
+					},
+					"response": []
+				},
+				{
+					"name": "Update a Task",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"priority\": \"Medium\",\n    \"description\": \"Deskripsi sudah diperbarui.\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/tasks/{{taskId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tasks",
+								"{{taskId}}"
+							]
+						},
+						"description": "Memperbarui satu atau lebih detail dari tugas yang sudah ada. Ganti `{{taskId}}` dengan ID tugas yang ingin diubah."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a Task",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/tasks/{{taskId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tasks",
+								"{{taskId}}"
+							]
+						},
+						"description": "Menghapus tugas berdasarkan ID. Ganti `{{taskId}}` dengan ID tugas yang ingin dihapus."
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:5001",
+			"type": "string"
+		},
+		{
+			"key": "taskId",
+			"value": "ganti_dengan_id_tugas_asli",
+			"type": "string"
+		}
+	]
+}
